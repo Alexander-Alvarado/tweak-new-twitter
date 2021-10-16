@@ -1564,13 +1564,14 @@ const configureCss = (() => {
           /* Use full width when the sidebar is not visible */
           body:not(.Sidebar)${pageSelector} header[role="banner"] {
             flex-grow: 0;
+            margin-left: 2rem;
           }
           body:not(.Sidebar)${pageSelector} main[role="main"] > div {
             width: 100%;
           }
           body:not(.Sidebar)${pageSelector} ${Selectors.PRIMARY_COLUMN} {
             max-width: unset;
-            width: 83%;
+            width: 90%;
           }
           body:not(.Sidebar)${pageSelector} ${Selectors.PRIMARY_COLUMN} > div:first-child > div:first-child div,
           body:not(.Sidebar)${pageSelector} ${Selectors.PRIMARY_COLUMN} > div:first-child > div:last-child {
