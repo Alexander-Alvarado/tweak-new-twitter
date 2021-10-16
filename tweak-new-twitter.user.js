@@ -1570,7 +1570,7 @@ const configureCss = (() => {
           }
           body:not(.Sidebar)${pageSelector} ${Selectors.PRIMARY_COLUMN} {
             max-width: unset;
-            width: 100%;
+            width: 83%;
           }
           body:not(.Sidebar)${pageSelector} ${Selectors.PRIMARY_COLUMN} > div:first-child > div:first-child div,
           body:not(.Sidebar)${pageSelector} ${Selectors.PRIMARY_COLUMN} > div:first-child > div:last-child {
