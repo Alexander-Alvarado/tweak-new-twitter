@@ -4,7 +4,7 @@
 // @namespace   https://github.com/insin/tweak-new-twitter/
 // @match       https://twitter.com/*
 // @match       https://mobile.twitter.com/*
-// @version     49
+// @version     56
 // ==/UserScript==
 
 let debug = false
@@ -30,8 +30,10 @@ const config = {
   dontUseChirpFont: false,
   fastBlock: true,
   followButtonStyle: 'monochrome',
+  followeesFollows: 'hide',
   hideAnalyticsNav: true,
   hideBookmarksNav: true,
+  hideCommunitiesNav: true,
   hideHelpCenterNav: true,
   hideKeyboardShortcutsNav: false,
   hideListsNav: true,
@@ -42,9 +44,12 @@ const config = {
   hideTopicsNav: true,
   hideTweetAnalyticsLinks: false,
   hideTwitterAdsNav: true,
+  hideTwitterBlueNav: true,
+  hideTwitterForProfessionalsNav: true,
   hideUnavailableQuoteTweets: true,
   hideWhoToFollowEtc: true,
   likedTweets: 'hide',
+  listTweets: 'hide',
   mutableQuoteTweets: true,
   mutedQuotes: [],
   quoteTweets: 'ignore',
@@ -95,6 +100,7 @@ const locales = {
     QUOTE_TWEETS: 'تغريدات اقتباس',
     RETWEETS: 'إعادات التغريد',
     SHARED_TWEETS: 'التغريدات المشتركة',
+    TIMELINE_OPTIONS: 'خيارات اليوميات',
     TWITTER: 'تويتر',
   },
   ar: {
@@ -106,6 +112,7 @@ const locales = {
     QUOTE_TWEETS: 'تغريدات اقتباس',
     RETWEETS: 'إعادات التغريد',
     SHARED_TWEETS: 'التغريدات المشتركة',
+    TIMELINE_OPTIONS: 'خيارات اليوميات',
     TWITTER: 'تويتر',
   },
   bg: {
@@ -117,6 +124,7 @@ const locales = {
     QUOTE_TWEETS: 'Туитове с цитат',
     RETWEETS: 'Ретуитове',
     SHARED_TWEETS: 'Споделени туитове',
+    TIMELINE_OPTIONS: 'Опции за хрониката',
   },
   bn: {
     ADD_MUTED_WORD: 'নীরব করা শব্দ যোগ করুন',
@@ -127,6 +135,7 @@ const locales = {
     QUOTE_TWEETS: 'টুইট উদ্ধৃতিগুলো',
     RETWEETS: 'পুনঃটুইটগুলো',
     SHARED_TWEETS: 'ভাগ করা টুইটগুলি',
+    TIMELINE_OPTIONS: 'সময়রেখার বিকল্প',
     TWITTER: 'টুইটার',
   },
   ca: {
@@ -138,6 +147,7 @@ const locales = {
     QUOTE_TWEETS: 'Tuits amb cita',
     RETWEETS: 'Retuits',
     SHARED_TWEETS: 'Tuits compartits',
+    TIMELINE_OPTIONS: 'Opcions de la cronologia',
   },
   cs: {
     ADD_MUTED_WORD: 'Přidat slovo na seznam skrytých slov',
@@ -148,6 +158,7 @@ const locales = {
     QUOTE_TWEETS: 'Tweety s citací',
     RETWEETS: 'Retweety',
     SHARED_TWEETS: 'Sdílené tweety',
+    TIMELINE_OPTIONS: 'Možnosti časové osy',
   },
   da: {
     ADD_MUTED_WORD: 'Tilføj skjult ord',
@@ -158,6 +169,7 @@ const locales = {
     QUOTE_TWEETS: 'Citat-Tweets',
     RETWEETS: 'Retweets',
     SHARED_TWEETS: 'Delte tweets',
+    TIMELINE_OPTIONS: 'Tidslinjeindstillinger',
   },
   de: {
     ADD_MUTED_WORD: 'Stummgeschaltetes Wort hinzufügen',
@@ -168,6 +180,7 @@ const locales = {
     QUOTE_TWEETS: 'Zitierte Tweets',
     RETWEETS: 'Retweets',
     SHARED_TWEETS: 'Geteilte Tweets',
+    TIMELINE_OPTIONS: 'Timeline-Optionen',
   },
   el: {
     ADD_MUTED_WORD: 'Προσθήκη λέξης σε σίγαση',
@@ -178,6 +191,7 @@ const locales = {
     QUOTE_TWEETS: 'Tweet με παράθεση',
     RETWEETS: 'Retweet',
     SHARED_TWEETS: 'Κοινόχρηστα Tweets',
+    TIMELINE_OPTIONS: 'Επιλογές χρονολογίου',
   },
   en: {
     ADD_MUTED_WORD: 'Add muted word',
@@ -188,6 +202,7 @@ const locales = {
     QUOTE_TWEETS: 'Quote Tweets',
     RETWEETS: 'Retweets',
     SHARED_TWEETS: 'Shared Tweets',
+    TIMELINE_OPTIONS: 'Timeline options',
     TWITTER: 'Twitter',
   },
   es: {
@@ -199,6 +214,7 @@ const locales = {
     QUOTE_TWEETS: 'Tweets citados',
     RETWEETS: 'Retweets',
     SHARED_TWEETS: 'Tweets compartidos',
+    TIMELINE_OPTIONS: 'Opciones de cronología',
   },
   eu: {
     ADD_MUTED_WORD: 'Gehitu isilarazitako hitza',
@@ -219,6 +235,7 @@ const locales = {
     QUOTE_TWEETS: 'نقل‌توییت',
     RETWEETS: 'بازتوییت‌ها',
     SHARED_TWEETS: 'توییتهای مشترک',
+    TIMELINE_OPTIONS: 'گزینه‌های خط زمان',
     TWITTER: 'توییتر',
   },
   fi: {
@@ -230,6 +247,7 @@ const locales = {
     QUOTE_TWEETS: 'Twiitin lainaukset',
     RETWEETS: 'Uudelleentwiittaukset',
     SHARED_TWEETS: 'Jaetut twiitit',
+    TIMELINE_OPTIONS: 'Aikajanavalinnat',
   },
   fil: {
     ADD_MUTED_WORD: 'Idagdag ang naka-mute na salita',
@@ -240,6 +258,7 @@ const locales = {
     QUOTE_TWEETS: 'Mga Quote na Tweet',
     RETWEETS: 'Mga Retweet',
     SHARED_TWEETS: 'Mga Ibinahaging Tweet',
+    TIMELINE_OPTIONS: 'Mga opsyon sa timeline',
   },
   fr: {
     ADD_MUTED_WORD: 'Ajouter un mot masqué',
@@ -250,6 +269,7 @@ const locales = {
     QUOTE_TWEETS: 'Tweets cités',
     RETWEETS: 'Retweets',
     SHARED_TWEETS: 'Tweets partagés',
+    TIMELINE_OPTIONS: 'Options du fil',
   },
   ga: {
     ADD_MUTED_WORD: 'Cuir focal balbhaithe leis',
@@ -280,6 +300,7 @@ const locales = {
     QUOTE_TWEETS: 'અવતરણની સાથે ટ્વીટ્સ',
     RETWEETS: 'પુનટ્વીટ્સ',
     SHARED_TWEETS: 'શેર કરેલી ટ્વીટ્સ',
+    TIMELINE_OPTIONS: 'સમય અવધિના વિકલ્પો',
   },
   he: {
     ADD_MUTED_WORD: 'הוסף מילה מושתקת',
@@ -290,6 +311,7 @@ const locales = {
     QUOTE_TWEETS: 'ציוצי ציטוט',
     RETWEETS: 'ציוצים מחדש',
     SHARED_TWEETS: 'ציוצים משותפים',
+    TIMELINE_OPTIONS: 'אפשרויות ציר זמן',
     TWITTER: 'טוויטר',
   },
   hi: {
@@ -301,6 +323,7 @@ const locales = {
     QUOTE_TWEETS: 'कोट ट्वीट्स',
     RETWEETS: 'रीट्वीट्स',
     SHARED_TWEETS: 'साझा किए गए ट्वीट',
+    TIMELINE_OPTIONS: 'टाइमलाइन विकल्प',
   },
   hr: {
     ADD_MUTED_WORD: 'Dodaj onemogućenu riječ',
@@ -311,6 +334,7 @@ const locales = {
     QUOTE_TWEETS: 'Citirani tweetovi',
     RETWEETS: 'Proslijeđeni tweetovi',
     SHARED_TWEETS: 'Dijeljeni tweetovi',
+    TIMELINE_OPTIONS: 'Mogućnosti vremenske crte',
   },
   hu: {
     ADD_MUTED_WORD: 'Elnémított szó hozzáadása',
@@ -321,6 +345,7 @@ const locales = {
     QUOTE_TWEETS: 'Tweet-idézések',
     RETWEETS: 'Retweetek',
     SHARED_TWEETS: 'Megosztott tweetek',
+    TIMELINE_OPTIONS: 'Idővonal beállításai',
   },
   id: {
     ADD_MUTED_WORD: 'Tambahkan kata kunci yang dibisukan',
@@ -331,6 +356,7 @@ const locales = {
     QUOTE_TWEETS: 'Kutip Tweet',
     RETWEETS: 'Retweet',
     SHARED_TWEETS: 'Tweet yang Dibagikan',
+    TIMELINE_OPTIONS: 'Pilihan Timeline',
   },
   it: {
     ADD_MUTED_WORD: 'Aggiungi parola o frase silenziata',
@@ -341,6 +367,7 @@ const locales = {
     QUOTE_TWEETS: 'Tweet di citazione',
     RETWEETS: 'Retweet',
     SHARED_TWEETS: 'Tweet condivisi',
+    TIMELINE_OPTIONS: 'Opzioni cronologia',
   },
   ja: {
     ADD_MUTED_WORD: 'ミュートするキーワードを追加',
@@ -351,6 +378,7 @@ const locales = {
     QUOTE_TWEETS: '引用ツイート',
     RETWEETS: 'リツイート',
     SHARED_TWEETS: '共有ツイート',
+    TIMELINE_OPTIONS: 'タイムラインオプション',
   },
   kn: {
     ADD_MUTED_WORD: 'ಸದ್ದಡಗಿಸಿದ ಪದವನ್ನು ಸೇರಿಸಿ',
@@ -361,6 +389,7 @@ const locales = {
     QUOTE_TWEETS: 'ಕೋಟ್ ಟ್ವೀಟ್‌ಗಳು',
     RETWEETS: 'ಮರುಟ್ವೀಟ್‌ಗಳು',
     SHARED_TWEETS: 'ಹಂಚಿದ ಟ್ವೀಟ್‌ಗಳು',
+    TIMELINE_OPTIONS: 'ಟೈಮ್‌ಲೈನ್ ಆಯ್ಕೆಗಳು',
   },
   ko: {
     ADD_MUTED_WORD: '뮤트할 단어 추가하기',
@@ -371,6 +400,7 @@ const locales = {
     QUOTE_TWEETS: '트윗 인용하기',
     RETWEETS: '리트윗',
     SHARED_TWEETS: '공유 트윗',
+    TIMELINE_OPTIONS: '타임라인 옵션',
     TWITTER: '트위터',
   },
   mr: {
@@ -382,6 +412,7 @@ const locales = {
     QUOTE_TWEETS: 'भाष्य ट्विट्स',
     RETWEETS: 'पुनर्ट्विट्स',
     SHARED_TWEETS: 'सामायिक ट्विट',
+    TIMELINE_OPTIONS: 'टाइमलाइनचे पर्याय',
   },
   ms: {
     ADD_MUTED_WORD: 'Tambahkan perkataan yang disenyapkan',
@@ -392,6 +423,7 @@ const locales = {
     QUOTE_TWEETS: 'Tweet Petikan',
     RETWEETS: 'Tweet semula',
     SHARED_TWEETS: 'Tweet Berkongsi',
+    TIMELINE_OPTIONS: 'Pilihan Garis Masa',
   },
   nb: {
     ADD_MUTED_WORD: 'Skjul nytt ord',
@@ -402,6 +434,7 @@ const locales = {
     QUOTE_TWEETS: 'Sitat-Tweets',
     RETWEETS: 'Retweets',
     SHARED_TWEETS: 'Delte tweets',
+    TIMELINE_OPTIONS: 'Alternativer for tidslinjen',
   },
   nl: {
     ADD_MUTED_WORD: 'Genegeerd woord toevoegen',
@@ -412,6 +445,7 @@ const locales = {
     QUOTE_TWEETS: 'Geciteerde Tweets',
     RETWEETS: 'Retweets',
     SHARED_TWEETS: 'Gedeelde Tweets',
+    TIMELINE_OPTIONS: 'Tijdlijn-opties',
   },
   pl: {
     ADD_MUTED_WORD: 'Dodaj wyciszone słowo',
@@ -419,9 +453,10 @@ const locales = {
     LATEST_TWEETS: 'Najnowsze Tweety',
     MUTE_THIS_CONVERSATION: 'Wycisz tę rozmowę',
     QUOTE_TWEET: 'Cytuj Tweeta',
-    QUOTE_TWEETS: 'Cytatów z Tweeta',
+    QUOTE_TWEETS: 'Cytaty z Tweeta',
     RETWEETS: 'Tweety podane dalej',
     SHARED_TWEETS: 'Udostępnione Tweety',
+    TIMELINE_OPTIONS: 'Opcje dotyczące osi czasu',
   },
   pt: {
     ADD_MUTED_WORD: 'Adicionar palavra silenciada',
@@ -432,6 +467,7 @@ const locales = {
     QUOTE_TWEETS: 'Tweets com comentário',
     RETWEETS: 'Retweets',
     SHARED_TWEETS: 'Tweets Compartilhados',
+    TIMELINE_OPTIONS: 'Opções de timeline',
   },
   ro: {
     ADD_MUTED_WORD: 'Adaugă cuvântul ignorat',
@@ -442,6 +478,7 @@ const locales = {
     QUOTE_TWEETS: 'Tweeturi cu citat',
     RETWEETS: 'Retweeturi',
     SHARED_TWEETS: 'Tweeturi partajate',
+    TIMELINE_OPTIONS: 'Opțiuni pentru cronologie',
   },
   ru: {
     ADD_MUTED_WORD: 'Добавить игнорируемое слово',
@@ -452,6 +489,7 @@ const locales = {
     QUOTE_TWEETS: 'Твиты с цитатами',
     RETWEETS: 'Ретвиты',
     SHARED_TWEETS: 'Общие твиты',
+    TIMELINE_OPTIONS: 'Параметры ленты',
     TWITTER: 'Твиттер',
   },
   sk: {
@@ -463,6 +501,7 @@ const locales = {
     QUOTE_TWEETS: 'Tweety s citátom',
     RETWEETS: 'Retweety',
     SHARED_TWEETS: 'Zdieľané Tweety',
+    TIMELINE_OPTIONS: 'Možnosti časovej osi',
   },
   sr: {
     ADD_MUTED_WORD: 'Додај игнорисану реч',
@@ -473,6 +512,7 @@ const locales = {
     QUOTE_TWEETS: 'твит(ов)а са цитатом',
     RETWEETS: 'Ретвитови',
     SHARED_TWEETS: 'Дељени твитови',
+    TIMELINE_OPTIONS: 'Опције временске траке',
     TWITTER: 'Твитер',
   },
   sv: {
@@ -484,6 +524,7 @@ const locales = {
     QUOTE_TWEETS: 'Citattweets',
     RETWEETS: 'Retweets',
     SHARED_TWEETS: 'Delade tweetsen',
+    TIMELINE_OPTIONS: 'Alternativ för tidslinjen',
   },
   ta: {
     ADD_MUTED_WORD: 'செயல்மறைத்த வார்த்தையைச் சேர்',
@@ -494,6 +535,7 @@ const locales = {
     QUOTE_TWEETS: 'மேற்கோள் கீச்சுகள்',
     RETWEETS: 'மறுகீச்சுகள்',
     SHARED_TWEETS: 'பகிரப்பட்ட ட்வீட்டுகள்',
+    TIMELINE_OPTIONS: 'காலவரிசை விருப்பங்கள்',
   },
   th: {
     ADD_MUTED_WORD: 'เพิ่มคำที่ซ่อน',
@@ -504,6 +546,7 @@ const locales = {
     QUOTE_TWEETS: 'ทวีตและคำพูด',
     RETWEETS: 'รีทวีต',
     SHARED_TWEETS: 'ทวีตที่แชร์',
+    TIMELINE_OPTIONS: 'ตัวเลือกลำดับเหตุการณ์',
     TWITTER: 'ทวิตเตอร์',
   },
   tr: {
@@ -515,6 +558,7 @@ const locales = {
     QUOTE_TWEETS: 'Alıntı Tweetler',
     RETWEETS: 'Retweetler',
     SHARED_TWEETS: 'Paylaşılan Tweetler',
+    TIMELINE_OPTIONS: 'Zaman akışı seçenekleri',
   },
   uk: {
     ADD_MUTED_WORD: 'Додати слово до списку ігнорування',
@@ -525,6 +569,7 @@ const locales = {
     QUOTE_TWEETS: 'Твіти з цитатою',
     RETWEETS: 'Ретвіти',
     SHARED_TWEETS: 'Спільні твіти',
+    TIMELINE_OPTIONS: 'Параметри стрічки',
     TWITTER: 'Твіттер',
   },
   ur: {
@@ -547,6 +592,7 @@ const locales = {
     QUOTE_TWEETS: 'Tweet trích dẫn',
     RETWEETS: 'Các Tweet lại',
     SHARED_TWEETS: 'Tweet được chia sẻ',
+    TIMELINE_OPTIONS: 'Các tùy chọn Dòng thời gian',
   },
   'zh-Hant': {
     ADD_MUTED_WORD: '加入靜音文字',
@@ -557,6 +603,7 @@ const locales = {
     QUOTE_TWEETS: '引用的推文',
     RETWEETS: '轉推',
     SHARED_TWEETS: '分享的推文',
+    TIMELINE_OPTIONS: '時間軸選項',
   },
   zh: {
     ADD_MUTED_WORD: '添加要隐藏的字词',
@@ -567,6 +614,7 @@ const locales = {
     QUOTE_TWEETS: '引用推文',
     RETWEETS: '转推',
     SHARED_TWEETS: '分享的推文',
+    TIMELINE_OPTIONS: '时间线选项',
   },
 }
 
@@ -597,9 +645,11 @@ const PagePaths = {
 /** @enum {string} */
 const Selectors = {
   BLOCK_MENU_ITEM: '[data-testid="block"]',
+  DESKTOP_TIMELINE_HEADER: 'div[data-testid="primaryColumn"] > div > div:first-of-type',
   DISPLAY_DONE_BUTTON_DESKTOP: '#layers div[role="button"]:not([aria-label])',
   DISPLAY_DONE_BUTTON_MOBILE: 'main div[role="button"]:not([aria-label])',
   MESSAGES_DRAWER: 'div[data-testid="DMDrawer"]',
+  MOBILE_TIMELINE_HEADER: 'header > div:nth-of-type(2) > div:first-of-type',
   NAV_HOME_LINK: 'a[data-testid="AppTabBar_Home_Link"]',
   PRIMARY_COLUMN: 'div[data-testid="primaryColumn"]',
   PRIMARY_NAV_DESKTOP: 'header nav',
@@ -743,6 +793,14 @@ function isOnQuoteTweetsPage() {
 
 function isOnSeparatedTweetsTimeline() {
   return currentPage == separatedTweetsTimelineTitle
+}
+
+function isOnTabbedTimeline() {
+  if (!isOnMainTimelinePage()) {
+    return false
+  }
+  let $header = document.querySelector(desktop ? Selectors.DESKTOP_TIMELINE_HEADER : Selectors.MOBILE_TIMELINE_HEADER)
+  return $header?.childElementCount == (desktop ? 3 : 2)
 }
 
 function isOnTopicsPage() {
@@ -1326,7 +1384,11 @@ async function addMuteQuotesMenuItem($blockMenuItem) {
     storeConfigChanges({mutedQuotes: config.mutedQuotes})
     processCurrentPage()
     // Dismiss the menu
-    ;/** @type {HTMLElement} */ ($blockMenuItem.closest('[role="dialog"]').firstElementChild).click()
+    let $menuLayer = /** @type {HTMLElement} */ ($blockMenuItem.closest('[role="group"]')?.firstElementChild)
+    if (!$menuLayer) {
+      log('could not find menu layer to dismiss menu')
+    }
+    $menuLayer?.click()
   })
 
   $blockMenuItem.insertAdjacentElement('beforebegin', $muteQuotes)
@@ -1405,43 +1467,61 @@ async function addSeparatedTweetsTimelineControl(page) {
   }
 
   if (mobile) {
-    let $timelineTitle = await getElement('header h2', {
-      name: 'timeline title',
-      stopIf: pageIsNot(page),
-    })
-
-    if ($timelineTitle == null) return
-
-    // We hide the existing timeline title via CSS when it's not wanted instead
-    // of changing its text, as those changes persist when you view a tweet.
-    $timelineTitle.classList.add('tnt_home_timeline_title')
-    removeMobileTimelineHeaderElements()
-
-    log('inserting separated tweets timeline switcher')
-
     let $toggle = document.createElement('div')
     $toggle.id = 'tnt_switch_timeline'
     let toggleColor = getComputedStyle(document.querySelector(`${Selectors.PRIMARY_NAV_MOBILE} a[href="/home"] svg`)).color
-    $toggle.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true" style="color: ${toggleColor}; width: 22px; vertical-align: text-bottom; position: relative; max-width: 100%; height: 22px; fill: currentcolor; display: inline-block;">
+    $toggle.innerHTML = `<span><svg viewBox="0 0 24 24" aria-hidden="true" style="color: ${toggleColor}; width: 22px; vertical-align: text-bottom; position: relative; max-width: 100%; height: 22px; fill: currentcolor; display: inline-block;">
       ${page == separatedTweetsTimelineTitle ? Svgs.HOME : Svgs.RETWEET}
-    </svg>`
-    $toggle.style.cursor = 'pointer'
-    $toggle.title = `Switch to ${page == currentMainTimelineType ? separatedTweetsTimelineTitle : currentMainTimelineType}`
-    $toggle.addEventListener('click', () => {
+    </svg></span>`
+    let $span = /** @type {HTMLSpanElement} */ ($toggle.firstElementChild)
+    $span.title = `Switch to ${page == currentMainTimelineType ? separatedTweetsTimelineTitle : currentMainTimelineType}`
+    $span.addEventListener('click', () => {
       let newTitle = page == separatedTweetsTimelineTitle ? currentMainTimelineType : separatedTweetsTimelineTitle
       setTitle(newTitle)
-      $toggle.title = `Switch to ${newTitle == currentMainTimelineType ? separatedTweetsTimelineTitle : currentMainTimelineType}`
+      $span.title = `Switch to ${newTitle == currentMainTimelineType ? separatedTweetsTimelineTitle : currentMainTimelineType}`
       window.scrollTo({top: 0})
     })
-    $timelineTitle.insertAdjacentElement('afterend', $toggle)
-    if (page == separatedTweetsTimelineTitle) {
-      let $sharedTweetsTitle = /** @type {HTMLElement} */ ($timelineTitle.cloneNode(true))
-      $sharedTweetsTitle.querySelector('span').textContent = separatedTweetsTimelineTitle
-      $sharedTweetsTitle.id = 'tnt_shared_tweets_timeline_title'
-      $sharedTweetsTitle.classList.remove('tnt_home_timeline_title')
-      $timelineTitle.insertAdjacentElement('afterend', $sharedTweetsTitle)
+
+    let $timelineTitle = document.querySelector('header h2')
+
+    // Only the non-tabbed timeline has a heading in the header
+    if ($timelineTitle != null) {
+      // We hide the existing timeline title via CSS when it's not wanted instead
+      // of changing its text, as those changes persist when you view a tweet.
+      $timelineTitle.classList.add('tnt_home_timeline_title')
+      removeMobileTimelineHeaderElements()
+
+      log('inserting separated tweets timeline switcher in timeline title')
+      $timelineTitle.insertAdjacentElement('afterend', $toggle)
+
+      if (page == separatedTweetsTimelineTitle) {
+        let $sharedTweetsTitle = /** @type {HTMLElement} */ ($timelineTitle.cloneNode(true))
+        $sharedTweetsTitle.querySelector('span').textContent = separatedTweetsTimelineTitle
+        $sharedTweetsTitle.id = 'tnt_shared_tweets_timeline_title'
+        $sharedTweetsTitle.classList.remove('tnt_home_timeline_title')
+        $timelineTitle.insertAdjacentElement('afterend', $sharedTweetsTitle)
+      }
+      $timelineTitle.parentElement.classList.add('tnt_mobile_header')
     }
-    $timelineTitle.parentElement.classList.add('tnt_mobile_header')
+    else {
+      let $headerContent = document.querySelector(`${Selectors.MOBILE_TIMELINE_HEADER} > div > div > div > div > div`)
+      if ($headerContent != null) {
+        if (config.alwaysUseLatestTweets) {
+          // This element reserves space for the timeline tabs - resize it for
+          // the header's contents, as the tabs are going to be hidden.
+          let $headerSizer = /** @type {HTMLDivElement} */ (document.querySelector('header > div'))
+          $headerSizer.style.height = getComputedStyle($headerContent).height
+        }
+
+        removeMobileTimelineHeaderElements()
+
+        log('inserting separated tweets timeline switcher in header')
+        $headerContent.appendChild($toggle)
+      }
+      else {
+        log('could not find header content element')
+      }
+    }
 
     // Go back to the main timeline when the Home bottom nav link is clicked on
     // the shared tweets timeline.
@@ -1478,19 +1558,25 @@ const configureCss = (() => {
   return function configureCss() {
     let cssRules = []
     let hideCssSelectors = []
+    let menuRole = `[role="${desktop ? 'menu' : 'dialog'}"]`
 
     if (config.alwaysUseLatestTweets) {
       // Hide the sparkle when automatically staying on Latest Tweets
       hideCssSelectors.push(mobile
-        ? 'body.MainTimeline header div:nth-of-type(3)'
-        : `body.MainTimeline ${Selectors.PRIMARY_COLUMN} > div > div:first-of-type > div > div > div > div > div > div:last-of-type`
+        ? `body.MainTimeline ${Selectors.MOBILE_TIMELINE_HEADER} > div > div > div > div > div > div:nth-of-type(3)`
+        : `body.MainTimeline ${Selectors.DESKTOP_TIMELINE_HEADER} > div > div > div > div > div > div:last-of-type`
+      )
+      // Hide timeline tabs
+      hideCssSelectors.push(mobile
+        ? `body.TimelineTabs ${Selectors.MOBILE_TIMELINE_HEADER} > div:nth-of-type(2)`
+        : `body.TimelineTabs ${Selectors.DESKTOP_TIMELINE_HEADER} > div:nth-of-type(2):not(:last-child)`
       )
     }
     if (config.hideAnalyticsNav) {
-      hideCssSelectors.push('div[role="dialog"] a[href*="analytics.twitter.com"]')
+      hideCssSelectors.push(`${menuRole} a[href*="analytics.twitter.com"]`)
     }
     if (config.hideBookmarksNav) {
-      hideCssSelectors.push('div[role="dialog"] a[href$="/bookmarks"]')
+      hideCssSelectors.push(`${menuRole} a[href$="/bookmarks"]`)
     }
     if (config.hideShareTweetButton) {
       hideCssSelectors.push(
@@ -1498,25 +1584,27 @@ const configureCss = (() => {
         '[data-testid="tweet"] [role="group"] > div:nth-of-type(4)',
         // Under individual tweets
         'body.Tweet [data-testid="tweet"] + div > div > [role="group"] > div:nth-of-type(4)',
+        // In media modal
+        '[aria-modal="true"] [role="group"] > div:nth-of-type(4)',
       )
     }
     if (config.hideHelpCenterNav) {
-      hideCssSelectors.push('div[role="dialog"] a[href*="support.twitter.com"]')
+      hideCssSelectors.push(`${menuRole} a[href*="support.twitter.com"]`)
     }
     if (config.hideListsNav) {
-      hideCssSelectors.push('div[role="dialog"] a[href$="/lists"]')
+      hideCssSelectors.push(`${menuRole} a[href$="/lists"]`)
     }
     if (config.hideMetrics) {
       configureHideMetricsCss(cssRules, hideCssSelectors)
     }
     if (config.hideMomentsNav) {
-      hideCssSelectors.push('div[role="dialog"] a[href$="/moment_maker"]')
+      hideCssSelectors.push(`${menuRole} a[href$="/moment_maker"]`)
     }
     if (config.hideNewslettersNav) {
-      hideCssSelectors.push('div[role="dialog"] a[href$="/newsletters"]')
+      hideCssSelectors.push(`${menuRole} a[href$="/newsletters"]`)
     }
     if (config.hideTopicsNav) {
-      hideCssSelectors.push('div[role="dialog"] a[href$="/topics"]')
+      hideCssSelectors.push(`${menuRole} a[href$="/topics"]`)
     }
     if (config.hideTweetAnalyticsLinks) {
       hideCssSelectors.push(
@@ -1527,7 +1615,13 @@ const configureCss = (() => {
       )
     }
     if (config.hideTwitterAdsNav) {
-      hideCssSelectors.push('div[role="dialog"] a[href*="ads.twitter.com"]')
+      hideCssSelectors.push(`${menuRole} a[href*="ads.twitter.com"]`)
+    }
+    if (config.hideTwitterBlueNav) {
+      hideCssSelectors.push(`${menuRole} a[href$="/twitter_blue_sign_up"]`)
+    }
+    if (config.hideTwitterForProfessionalsNav) {
+      hideCssSelectors.push(`${menuRole} a[href$="/convert_to_professional"]`)
     }
     if (config.hideWhoToFollowEtc) {
       hideCssSelectors.push(`body.Profile ${Selectors.PRIMARY_COLUMN} aside[role="complementary"]`)
@@ -1601,6 +1695,9 @@ const configureCss = (() => {
           '[data-testid="SideNav_AccountSwitcher_Button"] > div:first-child + div',
         )
       }
+      if (config.hideCommunitiesNav) {
+        hideCssSelectors.push(`${Selectors.PRIMARY_NAV_DESKTOP} a[href$="/communities"]`)
+      }
       if (config.addAddMutedWordMenuItem || config.mutableQuoteTweets) {
         // Hover colors for custom menu items
         cssRules.push(`
@@ -1610,7 +1707,7 @@ const configureCss = (() => {
         `)
       }
       if (config.hideKeyboardShortcutsNav) {
-        hideCssSelectors.push('div[role="dialog"] a[href$="/i/keyboard_shortcuts"]')
+        hideCssSelectors.push(`${menuRole} a[href$="/i/keyboard_shortcuts"]`)
       }
       if (config.hideSidebarContent) {
         // Only show the first sidebar item by default
@@ -1638,9 +1735,6 @@ const configureCss = (() => {
       if (config.hideBookmarksNav) {
         hideCssSelectors.push(`${Selectors.PRIMARY_NAV_DESKTOP} a[href="/i/bookmarks"]`)
       }
-      if (config.hideListsNav) {
-        hideCssSelectors.push(`${Selectors.PRIMARY_NAV_DESKTOP} a[href*="/lists"]`)
-      }
       if (config.hideMessagesDrawer) {
         cssRules.push(`${Selectors.MESSAGES_DRAWER} { visibility: hidden; }`)
       }
@@ -1653,13 +1747,9 @@ const configureCss = (() => {
       if (config.disableHomeTimeline) {
         hideCssSelectors.push(`${Selectors.PRIMARY_NAV_MOBILE} a[href="/home"]`)
       }
-      if (config.hideAnalyticsNav && config.hideTwitterAdsNav) {
-        // XXX Quick but brittle way to hide the divider above these items
-        hideCssSelectors.push('div[role="dialog"] div:nth-of-type(8)[role="separator"]')
-      }
       if (config.hideAppNags) {
         cssRules.push(`
-          body.Tweet header div:nth-of-type(3) > [role="button"] {
+          body.Tweet header div:nth-of-type(3) > div > [role="button"] {
             visibility: hidden;
           }
         `)
@@ -1672,6 +1762,9 @@ const configureCss = (() => {
           'body.Explore header nav',
           'body.Explore main',
         )
+      }
+      if (config.hideCommunitiesNav) {
+        hideCssSelectors.push(`${Selectors.PRIMARY_NAV_MOBILE} a[href$="/communities"]`)
       }
       if (config.hideMessagesBottomNavItem) {
         hideCssSelectors.push(`${Selectors.PRIMARY_NAV_MOBILE} a[href="/messages"]`)
@@ -1689,6 +1782,19 @@ const configureCss = (() => {
           }
         `)
         hideCssSelectors.push('body.SeparatedTweets .tnt_home_timeline_title')
+        cssRules.push(`
+          #tnt_switch_timeline span {
+            cursor: pointer;
+          }
+          body.TimelineTabs #tnt_switch_timeline {
+            align-items: end;
+            align-self: stretch;
+            display: flex;
+            flex-basis: 50%;
+            flex-direction: column;
+            justify-content: center;
+          }
+        `)
       }
     }
 
@@ -1752,9 +1858,14 @@ function configureHideMetricsCss(cssRules, hideCssSelectors) {
 
   if (individualTweetMetricSelectors) {
     // Individual tweet metrics
-    hideCssSelectors.push(`body.Tweet a:is(${individualTweetMetricSelectors}) > :first-child`)
+    hideCssSelectors.push(
+      `body.Tweet a:is(${individualTweetMetricSelectors}) > :first-child`,
+      `[aria-modal="true"] [data-testid="tweet"] a:is(${individualTweetMetricSelectors}) > :first-child`
+    )
     // Fix display of whitespace after hidden metrics
-    cssRules.push(`body.Tweet a:is(${individualTweetMetricSelectors}) { white-space: pre-line; }`)
+    cssRules.push(
+      `body.Tweet a:is(${individualTweetMetricSelectors}), [aria-modal="true"] [data-testid="tweet"] a:is(${individualTweetMetricSelectors}) { white-space: pre-line; }`
+    )
   }
 
   let timelineMetricSelectors = [
@@ -1764,9 +1875,11 @@ function configureHideMetricsCss(cssRules, hideCssSelectors) {
   ].filter(Boolean).join(', ')
 
   if (timelineMetricSelectors) {
-    // Metrics under timeline-style tweets
     cssRules.push(
-      `[data-testid="tweet"] [role="group"] > div:is(${timelineMetricSelectors}) div > span { visibility: hidden;}`
+      // Metrics under timeline-style tweets
+      `[data-testid="tweet"] [role="group"] > div:is(${timelineMetricSelectors}) div > span { visibility: hidden; }`,
+      // Metrics in media modal
+      `[aria-modal="true"] [role="group"] > div:is(${timelineMetricSelectors}) [data-testid="app-text-transition-container"] { visibility: hidden; }`,
     )
   }
 }
@@ -1871,7 +1984,7 @@ const configureThemeCss = (() => {
       // Shared styles for Following and Follow buttons
       cssRules.push(`
         [role="button"][data-testid$="-unfollow"]:not(:hover) {
-          border-color: rgba(0, 0, 0, 0);
+          border-color: rgba(0, 0, 0, 0) !important;
         }
         [role="button"][data-testid$="-follow"] {
           background-color: rgba(0, 0, 0, 0) !important;
@@ -1881,29 +1994,29 @@ const configureThemeCss = (() => {
         cssRules.push(`
           /* Following button */
           body.Default [role="button"][data-testid$="-unfollow"]:not(:hover) {
-            background-color: rgb(15, 20, 25);
+            background-color: rgb(15, 20, 25) !important;
           }
           body.Default [role="button"][data-testid$="-unfollow"]:not(:hover) > * {
-              color: rgb(255, 255, 255);
+            color: rgb(255, 255, 255) !important;
           }
           body:is(.Dim, .LightsOut) [role="button"][data-testid$="-unfollow"]:not(:hover) {
-            background-color: rgb(255, 255, 255);
+            background-color: rgb(255, 255, 255) !important;
           }
           body:is(.Dim, .LightsOut) [role="button"][data-testid$="-unfollow"]:not(:hover) > * {
-              color: rgb(15, 20, 25);
+            color: rgb(15, 20, 25) !important;
           }
           /* Follow button */
           body.Default [role="button"][data-testid$="-follow"] {
-            border-color: rgb(207, 217, 222);
+            border-color: rgb(207, 217, 222) !important;
           }
           body:is(.Dim, .LightsOut) [role="button"][data-testid$="-follow"] {
-            border-color: rgb(83, 100, 113);
+            border-color: rgb(83, 100, 113) !important;
           }
           body.Default [role="button"][data-testid$="-follow"] > * {
-            color: rgb(15, 20, 25);
+            color: rgb(15, 20, 25) !important;
           }
           body:is(.Dim, .LightsOut) [role="button"][data-testid$="-follow"] > * {
-            color: rgb(255, 255, 255);
+            color: rgb(255, 255, 255) !important;
           }
           body.Default [role="button"][data-testid$="-follow"]:hover {
             background-color: rgba(15, 20, 25, 0.1) !important;
@@ -1917,23 +2030,23 @@ const configureThemeCss = (() => {
         cssRules.push(`
           /* Following button */
           [role="button"][data-testid$="-unfollow"]:not(:hover) {
-            background-color: ${themeColor};
+            background-color: ${themeColor} !important;
           }
           [role="button"][data-testid$="-unfollow"]:not(:hover) > * {
-              color: rgb(255, 255, 255);
+              color: rgb(255, 255, 255) !important;
           }
           /* Follow button */
           [role="button"][data-testid$="-follow"] {
-            border-color: ${themeColor};
+            border-color: ${themeColor} !important;
           }
           [role="button"][data-testid$="-follow"] > * {
-            color: ${themeColor};
+            color: ${themeColor} !important;
           }
           [role="button"][data-testid$="-follow"]:hover {
             background-color: ${themeColor} !important;
           }
           [role="button"][data-testid$="-follow"]:hover > * {
-            color: rgb(255, 255, 255);
+            color: rgb(255, 255, 255) !important;
           }
         `)
       }
@@ -1970,7 +2083,9 @@ function getTweetType($tweet) {
   if ($tweet.querySelector('[data-testid="socialContext"]')) {
     if (!config.alwaysUseLatestTweets && currentMainTimelineType == getString('HOME')) {
       let svgPath = $tweet.querySelector('svg path')?.getAttribute('d') ?? ''
+      if (svgPath.startsWith('M12.225 12.165c-1.356 0-2.8')) return 'FOLLOWEES_FOLLOWS'
       if (svgPath.startsWith('M12 21.638h-.014C9.403 21.5')) return 'LIKED'
+      if (svgPath.startsWith('M19.75 2H4.25C3.013 2 2 3.0')) return 'LIST_TWEET'
       if (svgPath.startsWith('M14.046 2.242l-4.148-.01h-.')) return 'REPLIED'
       if (svgPath.startsWith('M18.265 3.314c-3.45-3.45-9.')) return 'SUGGESTED_TOPIC_TWEET'
       // This is the start of the SVG path for the Retweet icon
@@ -2049,22 +2164,6 @@ function handlePopup($popup) {
   }
 
   return result
-}
-
-/**
- * Automatically click a tweet's link to get rid of the "More Tweets" section.
- */
-async function hideMoreTweetsSection(path) {
-  let id = URL_TWEET_ID_RE.exec(path)[1]
-  let $tweetLink = await getElement(`a[href$="/status/${id}"]`, {
-    name: 'tweet',
-    stopIf: pathIsNot(path),
-    timeout: 2000,
-  })
-  if ($tweetLink) {
-    log('clicking the tweet link to hide "More Tweets"')
-    $tweetLink.click()
-  }
 }
 
 /**
@@ -2371,6 +2470,7 @@ function processCurrentPage() {
   $body.classList.toggle('Home', isOnHomeTimeline())
   $body.classList.toggle('LatestTweets', isOnLatestTweetsTimeline())
   $body.classList.toggle('SeparatedTweets', isOnSeparatedTweetsTimeline())
+  $body.classList.toggle('TimelineTabs', isOnTabbedTimeline())
 
   if (desktop) {
     if (config.fullWidthContent && (isOnMainTimelinePage() || isOnListPage())) {
@@ -2452,8 +2552,12 @@ function shouldHideAlgorithmicTweet(config, page) {
  */
 function shouldHideMainTimelineItem(type, page) {
   switch (type) {
+    case 'FOLLOWEES_FOLLOWS':
+      return shouldHideAlgorithmicTweet(config.followeesFollows, page)
     case 'LIKED':
       return shouldHideAlgorithmicTweet(config.likedTweets, page)
+    case 'LIST_TWEET':
+      return shouldHideAlgorithmicTweet(config.listTweets, page)
     case 'QUOTE_TWEET':
       return shouldHideSharedTweet(config.quoteTweets, page)
     case 'REPLIED':
@@ -2491,23 +2595,58 @@ async function switchToLatestTweets(page) {
   log('switching to Latest Tweets timeline')
 
   let contextSelector = mobile ? 'header div:nth-of-type(3)' : Selectors.PRIMARY_COLUMN
-  let $switchButton = await getElement(`${contextSelector} [role="button"]`, {
+  let $sparkleButton = await getElement(`${contextSelector} [role="button"]`, {
     name: 'sparkle button',
     stopIf: pageIsNot(page),
   })
-  if ($switchButton == null) return
+  if ($sparkleButton == null) return
 
-  log('clicking sparkle button')
-  $switchButton.click()
+  if ($sparkleButton.getAttribute('aria-label') == getString('TIMELINE_OPTIONS')) {
+    log('tabbed timeline is being used')
 
-  let $seeLatestTweetsInstead = await getElement('div[role="menu"] div[role="menuitem"]', {
-    name: '"See latest Tweets instead" menu item',
-    stopIf: pageIsNot(page),
-  })
-  if ($seeLatestTweetsInstead == null) return
+    let $timelineHeader = document.querySelector(desktop ? Selectors.DESKTOP_TIMELINE_HEADER : Selectors.MOBILE_TIMELINE_HEADER)
+    if ($timelineHeader == null) {
+      log('could not find timeline header')
+      return
+    }
 
-  log('clicking "See latest Tweets" instead menu item')
-  $seeLatestTweetsInstead.click()
+    if ($timelineHeader.childElementCount != (desktop ? 3 : 2)) {
+      log('timeline tabs not showing - clicking sparkle button')
+      $sparkleButton.click()
+
+      let $pinYourLatestTimeline = await getElement('div[role="menu"] div[role="menuitem"]', {
+        name: '"Pin your Latest timeline" menu item',
+        stopIf: pageIsNot(page),
+      })
+      if ($pinYourLatestTimeline == null) return
+
+      log('clicking "Pin your Latest timeline" menu item')
+      $pinYourLatestTimeline.click()
+    }
+
+    let $latestTweetsTab = /** @type {HTMLElement} */ ($timelineHeader.querySelector('[data-testid="ScrollSnap-List"] [role="presentation"]:nth-child(2) a'))
+    if ($latestTweetsTab == null) {
+      log('could not find "Latest Tweets" tab')
+      return
+    }
+
+    log('clicking "Latest Tweets" tab')
+    $latestTweetsTab.click()
+  }
+  else {
+    log('non-tabbed timeline is being used')
+    log('clicking sparkle button')
+    $sparkleButton.click()
+
+    let $seeLatestTweetsInstead = await getElement('div[role="menu"] div[role="menuitem"]', {
+      name: '"See latest Tweets instead" menu item',
+      stopIf: pageIsNot(page),
+    })
+    if ($seeLatestTweetsInstead == null) return
+
+    log('clicking "See latest Tweets" instead menu item')
+    $seeLatestTweetsInstead.click()
+  }
 }
 
 async function tweakExplorePage(page) {
@@ -2544,11 +2683,13 @@ async function tweakExplorePage(page) {
   )
 }
 
-async function tweakIndividualTweetPage() {
-  if (config.hideMoreTweets) {
-    if (location.search) {
-      hideMoreTweetsSection(currentPath)
-    }
+/**
+ * Re-navigates to a tweet to get rid of the "More Tweets" section.
+ */
+function tweakIndividualTweetPage() {
+  if (config.hideMoreTweets && location.search) {
+    log('re-navigating to get rid of More Tweets')
+    location.replace(location.origin + location.pathname)
   }
 }
 
@@ -2578,7 +2719,7 @@ function main() {
 }
 
 /**
- * @param {Partial<import("./types").Config} changes
+ * @param {Partial<import("./types").Config>} changes
  */
 function configChanged(changes) {
   log('config changed', changes)

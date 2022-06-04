@@ -8,8 +8,10 @@ export type Config = {
   dontUseChirpFont: boolean
   fastBlock: boolean
   followButtonStyle: 'monochrome' | 'themed'
+  followeesFollows: AlgorithmicTweetsConfig
   hideAnalyticsNav: boolean
   hideBookmarksNav: boolean
+  hideCommunitiesNav: boolean
   hideHelpCenterNav: boolean
   hideKeyboardShortcutsNav: boolean
   hideListsNav: boolean
@@ -20,9 +22,12 @@ export type Config = {
   hideTopicsNav: boolean
   hideTweetAnalyticsLinks: boolean
   hideTwitterAdsNav: boolean
+  hideTwitterBlueNav: boolean
+  hideTwitterForProfessionalsNav: boolean
   hideUnavailableQuoteTweets: boolean
   hideWhoToFollowEtc: boolean
   likedTweets: AlgorithmicTweetsConfig
+  listTweets: AlgorithmicTweetsConfig
   mutableQuoteTweets: boolean
   mutedQuotes: QuotedTweet[]
   quoteTweets: SharedTweetsConfig
@@ -71,6 +76,7 @@ export type LocaleKey =
   | 'QUOTE_TWEETS'
   | 'RETWEETS'
   | 'SHARED_TWEETS'
+  | 'TIMELINE_OPTIONS'
   | 'TWITTER'
 
 export type QuotedTweet = {
@@ -83,7 +89,9 @@ export type SharedTweetsConfig = 'separate' | 'hide' | 'ignore'
 
 export type TimelineItemType =
   | 'HEADING'
+  | 'FOLLOWEES_FOLLOWS'
   | 'LIKED'
+  | 'LIST_TWEET'
   | 'PROMOTED_TWEET'
   | 'QUOTE_TWEET'
   | 'REPLIED'

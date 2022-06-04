@@ -23,25 +23,27 @@ const checkboxGroups = new Map(Object.entries({
     mobile && 'hideAppNags',
   ].filter(Boolean),
   hideUnusedUiItems: [
+    'hideCommunitiesNav',
     'hideShareTweetButton',
     'hideTweetAnalyticsLinks',
     desktop && 'hideAccountSwitcher',
     desktop && 'hideBookmarksNav',
     desktop && 'hideExploreNav',
-    desktop && 'hideListsNav',
     desktop && 'hideMessagesDrawer',
     mobile && 'hideMessagesBottomNavItem',
   ].filter(Boolean),
   hideMoreSlideOutMenuItems: [
     'hideAnalyticsNav',
     'hideHelpCenterNav',
+    'hideListsNav',
     'hideMomentsNav',
     'hideNewslettersNav',
     'hideTopicsNav',
     'hideTwitterAdsNav',
+    'hideTwitterBlueNav',
+    'hideTwitterForProfessionalsNav',
     desktop && 'hideKeyboardShortcutsNav',
     mobile && 'hideBookmarksNav',
-    mobile && 'hideListsNav',
   ].filter(Boolean),
   hideAllMetrics: [
     'hideFollowingMetrics',
@@ -62,8 +64,10 @@ const defaultConfig = {
   dontUseChirpFont: false,
   fastBlock: true,
   followButtonStyle: 'monochrome',
+  followeesFollows: 'hide',
   hideAnalyticsNav: true,
   hideBookmarksNav: true,
+  hideCommunitiesNav: true,
   hideHelpCenterNav: true,
   hideKeyboardShortcutsNav: false,
   hideListsNav: true,
@@ -74,9 +78,12 @@ const defaultConfig = {
   hideTopicsNav: true,
   hideTweetAnalyticsLinks: false,
   hideTwitterAdsNav: true,
+  hideTwitterBlueNav: true,
+  hideTwitterForProfessionalsNav: true,
   hideUnavailableQuoteTweets: true,
   hideWhoToFollowEtc: true,
   likedTweets: 'hide',
+  listTweets: 'hide',
   mutableQuoteTweets: true,
   mutedQuotes: [],
   quoteTweets: 'ignore',
@@ -135,7 +142,7 @@ function exportConfig() {
   let $a = document.createElement('a')
   $a.download = 'tweak-new-twitter.config.txt'
   $a.href = URL.createObjectURL(new Blob([
-    JSON.stringify({version: '2.10', ...sortProperties(optionsConfig)}, null, 2)
+    JSON.stringify({version: '2.15.0', ...sortProperties(optionsConfig)}, null, 2)
   ], {type: 'text/plain'}))
   $a.click()
   URL.revokeObjectURL($a.href)

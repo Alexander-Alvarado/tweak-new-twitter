@@ -155,6 +155,7 @@ let template = {
   QUOTE_TWEET: 'c9d7235d',
   QUOTE_TWEETS: 'bd7c039f',
   RETWEETS: 'd497b854',
+  TIMELINE_OPTIONS: 'gf85d8c5',
   TWITTER: 'd2fb334b',
 }
 
@@ -170,16 +171,20 @@ function sortProperties(locale) {
   return Object.fromEntries(entries)
 }
 
-for (let file of fs.readdirSync('./files')) {
+for (let file of fs.readdirSync('./js')) {
+  if (!file.endsWith('.js')) continue
   let locale = {}
-  let src = fs.readFileSync(path.join('files', file), {encoding: 'utf8'})
+  let src = fs.readFileSync(path.join('js', file), {encoding: 'utf8'})
   for (let [key, code] of Object.entries(template)) {
     locale[key] = src.match(new RegExp(`"${code}","([^"]+)"`))[1]
   }
   let localeCode = file.split('.')[0]
   if (localeCode != 'en' && locale.TWITTER == 'Twitter') delete locale.TWITTER
+  if (localeCode != 'en' && locale.TIMELINE_OPTIONS == 'Timeline options') delete locale.TIMELINE_OPTIONS
   Object.assign(locale, externalTranslations[localeCode])
   locales[localeCode] = sortProperties(locale)
 }
 
-fs.writeFileSync('locales.js', JSON.stringify(locales, null, 2), {encoding: 'utf8'})
+fs.writeFileSync('locales.js', JSON.stringify(locales, null, 2), {
+  encoding: 'utf8',
+})
